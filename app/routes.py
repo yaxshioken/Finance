@@ -16,7 +16,7 @@ def login():
             session['user_id'] = user.id
             session['username'] = user.username
             flash(f'You are now logged in as {user.username}!', 'success')
-            return redirect(url_for('user_menu'))  # Redirect to appropriate route
+            return redirect(url_for('user_menu'))
         else:
             flash('Username or password is incorrect.', 'danger')
     return render_template('authorization/login.html', form=form)
@@ -30,17 +30,17 @@ def register():
         db.session.add(user)
         db.session.commit()
         flash('You are now registered!', 'success')
-        return redirect(url_for('login'))  # Redirect to login page after registration
+        return redirect(url_for('login'))
     return render_template('authorization/register.html', form=form)
 
 @app.route('/usermenu')
 def user_menu():
-    # Ensure the user is logged in before accessing this page
+
     if 'user_id' not in session:
         flash('You need to login first.', 'danger')
         return redirect(url_for('login'))
 
-    # Fetch user details from session or database
+
     user_id = session['user_id']
     user = User.query.get(user_id)
 

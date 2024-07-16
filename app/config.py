@@ -7,7 +7,6 @@ from flask_bcrypt import Bcrypt
 
 load_dotenv()
 
-
 app = Flask(__name__)
 
 class Config:
@@ -15,12 +14,8 @@ class Config:
     SECRET_KEY = os.getenv('SECRET_KEY')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
-
 app.config.from_object(Config)
-
 
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 bcrypt = Bcrypt(app)
-
-
